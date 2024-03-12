@@ -46,3 +46,5 @@ class CustomModelPermission(permissions.BasePermission):
         return request.user.has_perm(full_perm)
     
 
+
+

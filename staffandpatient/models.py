@@ -1,5 +1,5 @@
 from django.db import models
-
+from core.models import User
 
 # Create your models here.
 from django.utils import timezone
@@ -18,6 +18,8 @@ class StaffMember(models.Model):
     role = models.CharField(max_length=100)
     contact_info = models.CharField(max_length=100)
     availability = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
 
 class Patient(models.Model):
     name = models.CharField(max_length=100)
@@ -64,7 +66,32 @@ class AppointmentRequest(models.Model):
     notes = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(default=timezone.now)
     status=models.CharField(max_length=200,choices=choices,default='pending')
+    email=models.EmailField()
     
 
     def __str__(self):
         return f"Appointment Request by {self.patient_name}" 
+from django.core.mail import send_mail
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.core.mail import send_mail
+from django.conf import settings
+
+@receiver(post_save, sender=AppointmentRequest)
+def appointment_re(sender, instance, **kwargs):
+    
+    if instance.status =='denied':
+        send_low_inventory_email(instance)
+    elif instance.status =='approved':
+        low_inventory_email(instance)
+
+def send_low_inventory_email(appointmentreq):
+    subject = f"about your appointment request {appointmentreq.patient_name}"
+    message = f"your appointment with Dr.{appointmentreq.prefered_doctor} has been denied"
+    # user_email = appointmentreq.user.email
+    send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [appointmentreq.email])
+def low_inventory_email(appointmentreq):
+    subject = f"about your appointment request {appointmentreq.patient_name}"
+    message = f"your appointment with Dr.{appointmentreq.prefered_doctor} has been approved"
+    # user_email = appointmentreq.user.email
+    send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [appointmentreq.email])

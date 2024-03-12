@@ -10,6 +10,3 @@ from .models import *
 class Invoice(admin.ModelAdmin):
     pass
 
-@admin.register(Service)
-class Service(admin.ModelAdmin):
-    pass

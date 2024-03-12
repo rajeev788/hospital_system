@@ -9,8 +9,3 @@ class InvoiceSerializer(serializers.ModelSerializer):
          fields="__all__"
          model=Invoice
 
-class ServiceSerializer(serializers.ModelSerializer):
-    # invoice=InvoiceName()
-    class Meta:
-         fields="__all__"
-         model=Service

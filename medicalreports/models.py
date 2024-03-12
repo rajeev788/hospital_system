@@ -10,5 +10,5 @@ class ElectronicHealthRecord(models.Model):
     appointment_history = models.TextField(null=True,blank=True)
     billing_info = models.TextField(null=True,blank=True)
     insurance_info = models.TextField(null=True,blank=True)
-
+    
   

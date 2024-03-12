@@ -4,7 +4,7 @@ from django.urls import path
 
 urlpatterns=[
     path('doctors',DoctorApi.as_view()),
-    path('doctorssId/<pk>',DoctorIdApi.as_view()),
+    path('doctorsId/<pk>',DoctorIdApi.as_view()),
     path('staffs',StaffmemberApi.as_view()),
     path("staffsId/<pk>",StaffmemberIDApi.as_view()),
     path('schedule',ScheduleApi.as_view()),

@@ -11,7 +11,7 @@ from rest_framework.permissions import IsAuthenticated,IsAdminUser,BasePermissio
 from .models import *
 from django.contrib.auth.hashers import make_password
 from rest_framework.generics import GenericAPIView
-from rest_framework import generics
+from rest_framework import generics,permissions
 from django.contrib.auth.models import Group
 from rest_framework.authtoken.models import Token
 from core.permissions import CustomModelPermission
@@ -43,7 +43,7 @@ class StaffmemberApi(generics.ListCreateAPIView):
     serializer_class=StaffSerializer
     queryset=StaffMember.objects.all()
 
-class StaffmemberIDApi(generics.ListCreateAPIView):
+class StaffmemberIDApi(generics.RetrieveUpdateDestroyAPIView):
     queryset_model=StaffMember
     permission_classes=[IsAuthenticated,CustomModelPermission]
     serializer_class=StaffSerializer
@@ -88,11 +88,18 @@ class AppointmentIdApi(generics.RetrieveUpdateDestroyAPIView):
     serializer_class=AppointmentSerializer
     queryset=Appointment.objects.all()
 
-class AppointmentRequestApi(generics.CreateAPIView):
+class AppointmentRequestApi(generics.ListCreateAPIView):
+
     queryset_model=AppointmentRequest
     permission_classes=[IsAuthenticated,CustomModelPermission]
+    filterset_fields=['patient_name']
+    search_fields=['contact_info']
+    
     serializer_class=AppointmentRequestSerializer
     queryset=AppointmentRequest.objects.all()
+   
+
+
 
 
 class AppointmentReApi(generics.UpdateAPIView):

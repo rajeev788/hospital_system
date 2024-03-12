@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'reports',
     'medicalreports',
     "Accounting",
-    'drf_yasg',
+    # 'drf_yasg',
     'django_filters',
 
 

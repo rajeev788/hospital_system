@@ -28,14 +28,3 @@ class InvoiceIdApi(generics.RetrieveUpdateDestroyAPIView):
     serializer_class=InvoiceSerializer
     queryset=Invoice.objects.all()
 
-class ServiceApi(generics.ListCreateAPIView):
-    queryset_model=Service
-    permission_classes=[IsAuthenticated,CustomModelPermission]
-    serializer_class=ServiceSerializer
-    queryset=Service.objects.all()
-
-class ServiceIdApi(generics.RetrieveUpdateDestroyAPIView):
-    queryset_model=Service
-    permission_classes=[IsAuthenticated,CustomModelPermission]
-    serializer_class=ServiceSerializer
-    queryset=Service.objects.all()

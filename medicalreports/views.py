@@ -16,10 +16,10 @@ from core.permissions import CustomModelPermission
 class ElectronicHealthRecordApi(generics.ListCreateAPIView):
     queryset_model=ElectronicHealthRecord
     permission_classes=[IsAuthenticated,CustomModelPermission]
-    serializer_class=ElectronicHealthRecord
+    serializer_class=ElectronicHealthRecordSerializer
     queryset=ElectronicHealthRecord.objects.all()
 class ElectronicHealthRecordIdApi(generics.RetrieveUpdateDestroyAPIView):
     queryset_model=ElectronicHealthRecord
     permission_classes=[IsAuthenticated,CustomModelPermission]
-    serializer_class=ElectronicHealthRecord
+    serializer_class=ElectronicHealthRecordSerializer
     queryset=ElectronicHealthRecord.objects.all()
