@@ -17,6 +17,9 @@ SERVICE_TYPES = [
         ('ticket','ticket')
 ]
 
+class Treatment(models.Model):
+    pass
+    
 
 class Invoice(models.Model):
     
